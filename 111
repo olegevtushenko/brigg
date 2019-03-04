@@ -20,7 +20,7 @@ pipeline {
             steps {
                 sh 'ssh root@ub1 \'docker ps -a >> /var/log/1.log\''
             }
-        
+        }
         stage("therd step") {
             steps {
                 sh 'ssh root@ub1 \'docker kill $(docker ps -a -q)\''
