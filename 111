@@ -13,13 +13,19 @@ pipeline {
     stages {
         stage("First step") {
             steps {
-                sh 'ssh root@ub1 \'hostname\''
+                sh 'ssh root@ub1 \'docker run  -t -i -d  nginx:latest\''
             }
         }
         stage("Second step") {
             steps {
-                sh 'ssh root@ub1 \'docker ps -a\''
+                sh 'ssh root@ub1 \'docker ps -a >> /var/log/1.log\''
+            }
+        
+        stage("therd step") {
+            steps {
+                sh 'ssh root@ub1 \'docker kill $(docker ps -a -q)\''
             }
         }
+        
     }
 }
